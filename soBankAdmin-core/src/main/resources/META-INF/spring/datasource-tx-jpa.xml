@@ -4,6 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:repository="http://www.springframework.org/schema/data/repository"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:util="http://www.springframework.org/schema/util"
@@ -17,6 +18,8 @@
 		http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/data/jpa
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/data/repository
+    	http://www.springframework.org/schema/data/repository/spring-repository.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
@@ -38,10 +41,10 @@
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
         </property>
-<!--         	<property name="packagesToScan" value="com.iisigroup.jtd.ude.tutorials03"  />  -->
 		<property name="packagesToScan" >
 			<array>
-				<value>com.iisigroup.jtd.ude.tutorials03.model</value>				
+				<value>com.iisigroup.jtd.ude.tutorials03.model</value>
+				<value>com.iisigroup.product.secure.domain</value>	
 			</array>
 		</property>  
         <property name="jpaProperties">
@@ -58,8 +61,13 @@
     </bean>
 
     <context:annotation-config/> 
-    
-    <jpa:repositories base-package="com.iisigroup.jtd.ude.tutorials03.dao"
+     
+                      
+     <jpa:repositories base-package="com.iisigroup" 
                       entity-manager-factory-ref="emf"
-                      transaction-manager-ref="transactionManager"/>
+                      transaction-manager-ref="transactionManager"    > 
+			<repository:include-filter expression="com.iisigroup.product.secure.dao.*" type="regex" />  
+			<repository:include-filter expression="com.iisigroup.jtd.ude.tutorials03.dao.*" type="regex" />  
+	</jpa:repositories>
+	
 </beans>
