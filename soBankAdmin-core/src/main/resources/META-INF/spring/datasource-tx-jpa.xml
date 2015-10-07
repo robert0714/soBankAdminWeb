@@ -24,8 +24,9 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <jdbc:embedded-database id="dataSource" type="H2">
-        <jdbc:script location="classpath:META-INF/sql/schema.sql" encoding="UTF8" />
-        <jdbc:script location="classpath:META-INF/sql/test-data.sql"  encoding="UTF8"  />
+        <jdbc:script location="classpath:META-INF/database/h2/schema/*.sql"			encoding="UTF8" />	<!-- 效果不好 -->		
+		<jdbc:script location="classpath:META-INF/database/h2/data/*.sql"			encoding="UTF8" />
+		<jdbc:script location="classpath:META-INF/database/h2/schema/security.sql"			encoding="UTF8" />
     </jdbc:embedded-database>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
