@@ -60,9 +60,7 @@
                       transaction-manager-ref="transactionManager"/>
                       
     <jdbc:embedded-database id="dataSource" type="H2">
-		<jdbc:script location="classpath:database/h2/security.sql"
-			encoding="UTF8" />
-<!-- 		<jdbc:script location="classpath:META-INF/sql/test-data.sql" -->
-<!-- 			encoding="UTF8" /> -->
+		<jdbc:script location="classpath:META-INF/database/h2/schema/security.sql"
+			encoding="UTF8" /> 
 	</jdbc:embedded-database>
 </beans>
